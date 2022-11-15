@@ -1,15 +1,18 @@
 package com.senkohaitatsu.senkohaitatsu.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 
 @Entity
-public class Business {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Business {
     private int id;
     private String name;
-    private String tagline;
+    private String address;
     private boolean rtto;   //ready to take orders
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +24,20 @@ public class Business {
         this.id = id;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getName(){
         return name;
     }
 
     public void setName(String name){
         this.name = name;
-    }
-
-    public String getTagline(){
-        return tagline;
-    }
-
-    public void setTagline(String tagline){
-        this.tagline = tagline;
     }
     
     public boolean getRtto(){
